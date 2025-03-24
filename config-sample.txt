@@ -1,0 +1,50 @@
+[Database]
+# Datenbanktyp: mysql oder mssql
+type = mysql
+host = localhost
+port = 3306
+username = benutzer
+password = passwort
+database = inventar
+# Timeout in Sekunden
+connection_timeout = 30
+# Maximale Anzahl an Verbindungen im Pool
+max_connections = 5
+
+[Scheduler]
+# Zeit für die tägliche Abfrage (24-Stunden-Format)
+query_time = 23:00
+# Anzahl der Wiederholungsversuche bei Fehlern
+retry_attempts = 3
+# Intervall zwischen Wiederholungen in Minuten
+retry_interval = 10
+# Maximale Alter der zu speichernden Daten in Tagen
+max_data_age = 90
+
+[Report]
+# Prozentuale Änderung für Hervorhebung in Berichten
+highlight_threshold = 10
+# Anzahl der Tage für historische Daten
+history_days = 30
+# Standardexportformat (csv, excel, pdf)
+default_export_format = excel
+# Pfad für exportierte Berichte
+export_path = ./reports
+
+[Logging]
+# Logging-Level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+level = INFO
+# Pfad für Logdateien
+log_path = ./logs
+# Maximale Größe einer Logdatei in Bytes vor Rotation
+max_log_size = 10485760
+# Anzahl der zu behaltenden Logdateien
+backup_count = 5
+
+[UI]
+# GUI-Thema: system, light, dark
+theme = system
+# Sprache: de, en
+language = de
+# Automatisches Aktualisierungsintervall des Dashboards in Sekunden
+refresh_interval = 300
