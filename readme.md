@@ -2,6 +2,8 @@
 
 Eine Python-GUI-Anwendung zur Verfolgung von Lagerbeständen und Artikelstatusänderungen durch automatisierte Datenbankabfragen.
 
+![Dashboard Screenshot](doc/img/dashboard_screenshot.png)
+
 ## Funktionen
 
 - Tägliche automatisierte Datenbankabfragen zu konfigurierbaren Zeiten
@@ -40,6 +42,13 @@ Eine Python-GUI-Anwendung zur Verfolgung von Lagerbeständen und Artikelstatusä
    - Kopieren Sie `config/config.ini.example` nach `config/config.ini`
    - Bearbeiten Sie `config/config.ini` mit Ihren Datenbankverbindungsdetails und Scheduler-Einstellungen
 
+4. Datenbank einrichten:
+   - Verwenden Sie die SQL-Skripte im `config`-Verzeichnis, um die Datenbankstruktur zu erstellen:
+     - `schema_mysql.sql` für MySQL
+     - `schema_mssql.sql` für MS SQL Server
+
+Ausführlichere Installationsanweisungen finden Sie in der [Installationsanleitung](INSTALLATION.md).
+
 ## Verwendung
 
 1. Starten Sie die Anwendung:
@@ -52,6 +61,12 @@ Eine Python-GUI-Anwendung zur Verfolgung von Lagerbeständen und Artikelstatusä
 3. Die Anwendung führt die konfigurierten Abfragen automatisch zur angegebenen Zeit jeden Tag aus.
 
 4. Verwenden Sie die Berichtsansicht, um Bestandsänderungen und Artikelstatus zu analysieren.
+
+### Befehlszeilenoptionen
+
+- `--no-gui`: Startet die Anwendung im Headless-Modus (ohne GUI)
+- `--run-now`: Führt die geplante Aufgabe sofort aus
+- `--config PATH`: Gibt einen alternativen Pfad zur Konfigurationsdatei an
 
 ## Konfiguration
 
@@ -85,6 +100,27 @@ retry_interval = 10  # Intervall zwischen Wiederholungen in Minuten
 highlight_threshold = 10  # Prozentuale Änderung für Hervorhebung in Berichten
 history_days = 30  # Anzahl der Tage für historische Daten
 ```
+
+## Programmstruktur
+
+Die Anwendung ist in mehrere Module unterteilt:
+
+- **core/**: Geschäftslogik
+  - `inventory_tracker.py`: Bestandsverfolgung und Änderungserkennung
+  - `report_generator.py`: Berichtsgenerierung und -formatierung
+- **data/**: Datenzugriff
+  - `db_manager.py`: Datenbankverbindungsverwaltung
+  - `query_executor.py`: Abfrageausführung und -caching
+- **gui/**: Benutzeroberfläche
+  - `main_window.py`: Hauptfenster der Anwendung
+  - `settings_dialog.py`: Einstellungsdialog
+  - `report_view.py`: Berichtsanzeige
+- **scheduler/**: Aufgabenplanung
+  - `task_scheduler.py`: Zeitplanung und Aufgabenausführung
+- **utils/**: Hilfsfunktionen
+  - `config_manager.py`: Konfigurationsverwaltung
+  - `logger.py`: Logging-Funktionalität
+  - `storage.py`: Lokale Datenspeicherung
 
 ## Fallback-Mechanismus
 
